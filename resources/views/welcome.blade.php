@@ -53,11 +53,7 @@
 				{ { $message['content'] }}
 				<a href="/messages/{ { $message['id']}}">Leer más</a>
 			</p>-->
-			<img class="img-thumbnail" src="{{ $message->image }}">
-			<p class="card-text">
-				{{ $message->content }}
-				<a href="/messages/{{ $message->id}}">Leer más</a>
-			</p>
+			@include('messages.message')
 
 		</div>
 	@empty
