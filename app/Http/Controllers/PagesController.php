@@ -13,7 +13,7 @@ class PagesController extends Controller
 		//'https://facebook.com/ivanrojo07' => 'Facebook',
 		//'/about' => 'Nosotros'
 	//];
-        $messages =Message::paginate(10);
+        $messages =Message::latest()->paginate(10);
         //Todos los mensajes$messages =Message::all();
         /*[
             [
