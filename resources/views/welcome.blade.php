@@ -31,7 +31,7 @@
 		</nav>
 </div>
 <div class="row">
-	<form action="/messages/create" method="post">
+	<form action="/messages/create" method="post" enctype="multipart/form-data">
 		<div class="form-group @if ($errors->has('message')) has-error @endif">
 		{{ csrf_field() }}
 			<input type="text" name="message" class="form-control" placeholder="Ola Ke Ase?">
@@ -41,6 +41,7 @@
 				<div class="has-feedback">{{ $error }}</div>
 				@endforeach
 				@endif
+				<input type="file" class="form-control-file" name="image">
 			</input>
 		</div>
 	</form>

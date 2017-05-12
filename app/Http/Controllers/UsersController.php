@@ -53,7 +53,9 @@ class UsersController extends Controller
 
 
     private function findByUsername($username){
-    	return User::where('username', $username)->first();
+    	//return User::where('username', $username)->first();
+        //Busca el primero OR manda un error 404
+        return User::where('username', $username)->firstOrFail();
     }
 
     public function sendPrivateMessage($username, Request $request){

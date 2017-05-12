@@ -13,11 +13,12 @@ class MessagesController extends Controller
     public function create(CreateMessageRequest $request){
 
         $user = $request->user();
+        $image = $request->file('image');
 
     	$message = Message::create([
             'user_id' => $user->id,
     		 'content'=> $request->input('message'),
-    		 'image' => 'http://lorempixel.com/600/338?'.mt_rand(0,1000),
+    		 'image' => $image->store('messages', 'public'),
 
     		]);
     	//dd($message);
@@ -46,5 +47,24 @@ class MessagesController extends Controller
     	return view('messages.show', [
     			'message' => $message
     		]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        //Base de datos$message = Message::with('user')->where('content', 'LIKE', "%$query%")->get();
+        //motor de busquedas
+        $message = Message::search($query)->get();
+        $message->load('user');
+
+        return view('messages.index', [
+            'messages' => $message
+            ]);
+    } 
+
+    public function responses(Message $message){
+
+        return $message->responses;
     }
 }
